@@ -15,6 +15,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,23 +36,51 @@ public class MainView extends VerticalLayout {
 
     // Creates an object of Contact Service, which is responsible for business logic
     private ContactService contactService;
+
+    // Creates grid object of Contact Objects
     private Grid<Contact> grid = new Grid<>(Contact.class);
+
+    // Creates TextField Object for filtering text
+    private TextField filterText = new TextField();
 
     public MainView(ContactService contactService) {
         this.contactService = contactService;
         addClassName("list-view");
         setSizeFull();
+        configureFilter(); // Method call for what filter should do
         configureGrid();
 
-        add(grid);
+        // Adds elements to Visible UI
+        add(filterText, grid);
         updateList();
+    }
+
+    /**
+     * Method configures filter for filtering data.
+     */
+    private void configureFilter() {
+
+        // Placeholder text
+        filterText.setPlaceholder(("Filter by name ..."));
+
+        // Clear button visible, so filter can be cleared
+        filterText.setClearButtonVisible(true);
+
+        // Creates delay for changes after typing.
+        filterText.setValueChangeMode(ValueChangeMode.LAZY);
+
+        /*
+         * Lambda, listener for events.
+         * Value Change triggers updateList() method call
+         */
+        filterText.addValueChangeListener((e -> updateList()));
     }
 
     /**
      * This method updates list of data, which is presented in grid.
      */
     private void updateList() {
-        grid.setItems(contactService.findAll());
+        grid.setItems(contactService.findAll(filterText.getValue()));
     }
 
     /**

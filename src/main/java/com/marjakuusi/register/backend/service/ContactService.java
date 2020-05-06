@@ -15,6 +15,13 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @author jthaapas
+ * @version 7.5.2020
+ *
+ * This is a backend component, Service Class which handles logic for Contact Objects
+ */
+
 @Service
 public class ContactService {
     private static final Logger LOGGER = Logger.getLogger(ContactService.class.getName());
@@ -29,6 +36,21 @@ public class ContactService {
 
     public List<Contact> findAll() {
         return contactRepository.findAll();
+    }
+
+    // findAll method for filtering purposes,
+
+    /**
+     * If filter text is not empty, will search match from repo.
+     * @param stringFilter Filter Text as parameter.
+     * @return Matched Data as String
+     */
+    public List<Contact> findAll(String stringFilter) {
+        if (stringFilter == null || stringFilter.isEmpty()) {
+            return contactRepository.findAll();
+        } else {
+            return contactRepository.search(stringFilter);
+        }
     }
 
     public long count() {
