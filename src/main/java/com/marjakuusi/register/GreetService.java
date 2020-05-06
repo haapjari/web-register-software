@@ -11,7 +11,7 @@ public class GreetService implements Serializable {
         if (name == null || name.isEmpty()) {
             return "Hello anonymous user";
         } else {
-            return "Hello " + name;
+            return "Morjesta " + name;
         }
     }
 
