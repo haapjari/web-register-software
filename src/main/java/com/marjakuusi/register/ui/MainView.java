@@ -3,26 +3,20 @@ package com.marjakuusi.register.ui;
 import com.marjakuusi.register.backend.entity.Company;
 import com.marjakuusi.register.backend.entity.Contact;
 import com.marjakuusi.register.backend.service.ContactService;
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.datepicker.DatePicker;
+
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author jthaapas
- * @version 7.5.2020
+ * @version 8.5.2020
  */
 
 /**
@@ -32,10 +26,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 @Route("")
+@CssImport("./styles/shared-styles.css")
 public class MainView extends VerticalLayout {
 
-    // Creates an object of Contact Service, which is responsible for business logic
-    private ContactService contactService;
+    // Creates new ContactForm Component
+    private final ContactForm form;
 
     // Creates grid object of Contact Objects
     private Grid<Contact> grid = new Grid<>(Contact.class);
@@ -43,44 +38,29 @@ public class MainView extends VerticalLayout {
     // Creates TextField Object for filtering text
     private TextField filterText = new TextField();
 
+    // Creates an object of Contact Service, which is responsible for business logic
+    private ContactService contactService;
+
     public MainView(ContactService contactService) {
+
         this.contactService = contactService;
         addClassName("list-view");
         setSizeFull();
-        configureFilter(); // Method call for what filter should do
+
         configureGrid();
+        configureFilter(); // Method call for what filter should do
+
+        // Initialize the form in the constructor.
+        form = new ContactForm();
+
+        // Creates HTML Div, that wraps Grid and form.
+        Div content = new Div(grid, form);
+        content.addClassName("content");
+        content.setSizeFull();
 
         // Adds elements to Visible UI
-        add(filterText, grid);
+        add(filterText, content);
         updateList();
-    }
-
-    /**
-     * Method configures filter for filtering data.
-     */
-    private void configureFilter() {
-
-        // Placeholder text
-        filterText.setPlaceholder(("Filter by name ..."));
-
-        // Clear button visible, so filter can be cleared
-        filterText.setClearButtonVisible(true);
-
-        // Creates delay for changes after typing.
-        filterText.setValueChangeMode(ValueChangeMode.LAZY);
-
-        /*
-         * Lambda, listener for events.
-         * Value Change triggers updateList() method call
-         */
-        filterText.addValueChangeListener((e -> updateList()));
-    }
-
-    /**
-     * This method updates list of data, which is presented in grid.
-     */
-    private void updateList() {
-        grid.setItems(contactService.findAll(filterText.getValue()));
     }
 
     /**
@@ -110,6 +90,34 @@ public class MainView extends VerticalLayout {
          * This piece of code loops through every column.
          */
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+    }
+
+    /**
+     * Method configures filter for filtering data.
+     */
+    private void configureFilter() {
+
+        // Placeholder text
+        filterText.setPlaceholder(("Filter by name ..."));
+
+        // Clear button visible, so filter can be cleared
+        filterText.setClearButtonVisible(true);
+
+        // Creates delay for changes after typing.
+        filterText.setValueChangeMode(ValueChangeMode.LAZY);
+
+        /*
+         * Lambda, listener for events.
+         * Value Change triggers updateList() method call
+         */
+        filterText.addValueChangeListener((e -> updateList()));
+    }
+
+    /**
+     * This method updates list of data, which is presented in grid.
+     */
+    private void updateList() {
+        grid.setItems(contactService.findAll(filterText.getValue()));
     }
 
 }
