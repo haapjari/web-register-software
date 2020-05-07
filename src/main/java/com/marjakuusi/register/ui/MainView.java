@@ -2,6 +2,7 @@ package com.marjakuusi.register.ui;
 
 import com.marjakuusi.register.backend.entity.Company;
 import com.marjakuusi.register.backend.entity.Contact;
+import com.marjakuusi.register.backend.service.CompanyService;
 import com.marjakuusi.register.backend.service.ContactService;
 
 import com.vaadin.flow.component.UI;
@@ -33,15 +34,16 @@ public class MainView extends VerticalLayout {
     private final ContactForm form;
 
     // Creates grid object of Contact Objects
-    private Grid<Contact> grid = new Grid<>(Contact.class);
+    Grid<Contact> grid = new Grid<>(Contact.class);
 
     // Creates TextField Object for filtering text
-    private TextField filterText = new TextField();
+    TextField filterText = new TextField();
 
     // Creates an object of Contact Service, which is responsible for business logic
     private ContactService contactService;
 
-    public MainView(ContactService contactService) {
+    public MainView(ContactService contactService,
+                    CompanyService companyService) {
 
         this.contactService = contactService;
         addClassName("list-view");
@@ -51,7 +53,7 @@ public class MainView extends VerticalLayout {
         configureFilter(); // Method call for what filter should do
 
         // Initialize the form in the constructor.
-        form = new ContactForm();
+        form = new ContactForm(companyService.findAll());
 
         // Creates HTML Div, that wraps Grid and form.
         Div content = new Div(grid, form);
@@ -59,6 +61,7 @@ public class MainView extends VerticalLayout {
         content.setSizeFull();
 
         // Adds elements to Visible UI
+        // add(filterText, content);
         add(filterText, content);
         updateList();
     }
