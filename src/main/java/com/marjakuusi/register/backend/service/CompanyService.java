@@ -21,4 +21,14 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
+    /**
+     * Loops through each company and returns a Map containing the company name and number of employees.
+     * @return
+     */
+    public Map<String, Integer> getStats() {
+        HashMap<String, Integer> stats = new HashMap<>();
+        findAll().forEach(company -> stats.put(company.getName(), company.getEmployees().size()));
+        return stats;
+    }
+
 }

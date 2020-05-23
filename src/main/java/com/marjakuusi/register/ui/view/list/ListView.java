@@ -1,20 +1,21 @@
-package com.marjakuusi.register.ui;
+package com.marjakuusi.register.ui.view.list;
 
 import com.marjakuusi.register.backend.entity.Company;
 import com.marjakuusi.register.backend.entity.Contact;
 import com.marjakuusi.register.backend.service.CompanyService;
 import com.marjakuusi.register.backend.service.ContactService;
 
-import com.vaadin.flow.component.UI;
+import com.marjakuusi.register.ui.MainLayout;
+import com.marjakuusi.register.ui.view.list.ContactForm;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 /**
@@ -28,9 +29,11 @@ import com.vaadin.flow.router.Route;
  * Defines some Vaadin components and gets data from backend.
  */
 
-@Route("")
-@CssImport("./styles/shared-styles.css")
-public class MainView extends VerticalLayout {
+/* ListView matches empty path, but uses MainLayout as its parent, this is why we can also remove CssImport */
+
+@Route(value="", layout = MainLayout.class)
+@PageTitle("Contacts | Vaadin CRM")
+public class ListView extends VerticalLayout {
 
     // Creates new ContactForm Component
     private final ContactForm form;
@@ -44,7 +47,7 @@ public class MainView extends VerticalLayout {
     // Creates an object of Contact Service, which is responsible for business logic
     private ContactService contactService;
 
-    public MainView(ContactService contactService,
+    public ListView(ContactService contactService,
                     CompanyService companyService) {
 
         this.contactService = contactService;
