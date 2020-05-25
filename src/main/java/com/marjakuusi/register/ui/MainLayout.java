@@ -5,6 +5,7 @@ import com.marjakuusi.register.ui.view.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -26,7 +27,15 @@ public class MainLayout extends AppLayout { // App layout is Vaadin Layout with 
         logo.addClassName("logo");
 
         // DrawerToggle is a menu button that toggles visibility of a toolbar
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
+
+        // Creates <a></a> HTML to binds that to logout.
+        Anchor logout = new Anchor("logout", "Log out");
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo, logout);
+
+        // Calls header.expand(logo) to make the logo take up all the extra space in the layout. This pushes the logout button to the far right.
+        header.expand(logo);
+
+
 
         header.setDefaultVerticalComponentAlignment(
                 FlexComponent.Alignment.CENTER); // Centers the component in the header along the vertical axis
@@ -52,4 +61,6 @@ public class MainLayout extends AppLayout { // App layout is Vaadin Layout with 
                 new RouterLink("Dashboard", DashboardView.class)
         ));
     }
+
+
 }
