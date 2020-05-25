@@ -1,4 +1,4 @@
-package com.marjakuusi.register.ui.view.list;
+package com.marjakuusi.register.ui.views.list;
 
 import com.marjakuusi.register.backend.entity.Company;
 import com.marjakuusi.register.backend.entity.Contact;
@@ -6,9 +6,7 @@ import com.marjakuusi.register.backend.service.CompanyService;
 import com.marjakuusi.register.backend.service.ContactService;
 
 import com.marjakuusi.register.ui.MainLayout;
-import com.marjakuusi.register.ui.view.list.ContactForm;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -17,6 +15,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * @author jthaapas
@@ -31,12 +31,16 @@ import com.vaadin.flow.router.Route;
 
 /* ListView matches empty path, but uses MainLayout as its parent, this is why we can also remove CssImport */
 
+/* Component annotation makes it possible to autowire it, Scope ensures that every test runs on fresh instance */
+
+@Component
+@Scope("prototype")
 @Route(value="", layout = MainLayout.class)
 @PageTitle("Contacts | Vaadin CRM")
 public class ListView extends VerticalLayout {
 
     // Creates new ContactForm Component
-    private final ContactForm form;
+    ContactForm form;
 
     // Creates grid object of Contact Objects
     Grid<Contact> grid = new Grid<>(Contact.class);

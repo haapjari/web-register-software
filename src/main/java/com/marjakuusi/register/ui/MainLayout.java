@@ -1,7 +1,7 @@
 package com.marjakuusi.register.ui;
 
-import com.marjakuusi.register.ui.view.dashboard.DashboardView;
-import com.marjakuusi.register.ui.view.list.ListView;
+import com.marjakuusi.register.ui.views.dashboard.DashboardView;
+import com.marjakuusi.register.ui.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;

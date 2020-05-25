@@ -1,4 +1,4 @@
-package com.marjakuusi.register.ui.view.dashboard;
+package com.marjakuusi.register.ui.views.dashboard;
 
 import com.marjakuusi.register.backend.service.CompanyService;
 import com.marjakuusi.register.backend.service.ContactService;

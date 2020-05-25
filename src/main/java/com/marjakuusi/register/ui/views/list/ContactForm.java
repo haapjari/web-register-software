@@ -1,4 +1,4 @@
-package com.marjakuusi.register.ui.view.list;
+package com.marjakuusi.register.ui.views.list;
 
 /**
  * @author jthaapas
