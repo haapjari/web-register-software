@@ -12,10 +12,19 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.PWA;
 
 /* CSS Import */
 
+/* PWA Annnotation triggers Vaadin to Create necessary resources to deploy PWA (ServiceWorker and manifest file) */
+
 @CssImport("./styles/shared-styles.css")
+@PWA(
+        name = "VaadinCRM",
+        shortName = "VaadinCRM",
+        offlineResources = {
+                "./styles/offline.css",
+                "./images/offline.png"})
 public class MainLayout extends AppLayout { // App layout is Vaadin Layout with header and responsive drawer
     public MainLayout() {
         createHeader();
