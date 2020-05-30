@@ -1,9 +1,9 @@
 package com.marjakuusi.register.backend.service;
 
 import com.marjakuusi.register.backend.entity.Customer;
-import com.marjakuusi.register.backend.entity.Product;
+import com.marjakuusi.register.backend.entity.Type;
 import com.marjakuusi.register.backend.repository.CustomerRepository;
-import com.marjakuusi.register.backend.repository.ProductRepository;
+import com.marjakuusi.register.backend.repository.TypeRepository;
 
 import org.springframework.stereotype.Service;
 
@@ -18,8 +18,10 @@ import java.util.stream.Stream;
 /**
  * @author Jari Haapasaari
  * @version 30.5.2020
- * Backend Component that handles most of the Customer and Data Object Logic.
+ * Service Class. This Class will handle business logic and database access.
  */
+
+/* Annotation lets Spring Framework now that this is a service class, and configures it available for dependency injection */
 
 @Service
 public class CustomerService {
@@ -30,16 +32,16 @@ public class CustomerService {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerService.class.getName());
     private CustomerRepository customerRepository;
-    private ProductRepository productRepository;
+    private TypeRepository typeRepository;
 
     /* ----------------------------------------------------------------------------------- */
 
     /* constructors */
 
     public CustomerService(CustomerRepository customerRepository,
-                           ProductRepository productRepository) {
+                           TypeRepository typeRepository) {
         this.customerRepository = customerRepository;
-        this.productRepository = productRepository;
+        this.typeRepository = typeRepository;
     }
 
     /* ----------------------------------------------------------------------------------- */
@@ -66,10 +68,17 @@ public class CustomerService {
         }
     }
 
+    /**
+     * @return count objects in customerRepository object
+     */
     public long count() {
         return customerRepository.count();
     }
 
+    /**
+     * Delete customer object from customerRepository.
+     * @param customer object to be deleted
+     */
     public void delete(Customer customer) {
         customerRepository.delete(customer);
     }
@@ -94,28 +103,32 @@ public class CustomerService {
      * TODO
      * Change this to where data is read from file or database.
      */
+
+    /* Annotation tells Spring to run this method after constuctors */
+
     @PostConstruct
     public void populateTestData() {
 
-        if (productRepository.count() == 0) {
-            productRepository.saveAll(
-                    Stream.of("Apple", "Lemon", "Pear")
-                            .map(Product::new)
+        if (typeRepository.count() == 0) {
+            typeRepository.saveAll(
+                    Stream.of("Consumer", "Business", "Enterprise")
+                            .map(Type::new)
                             .collect(Collectors.toList()));
         }
 
         if (customerRepository.count() == 0) {
             Random r = new Random(0);
-            List<Product> products = productRepository.findAll();
+            List<Type> groupEntities = typeRepository.findAll();
 
             customerRepository.saveAll(
-                    Stream.of("Mikki Hiiri", "Aku Ankka", "Hessu Hopo", "Roope Ankka")
+                    Stream.of("Mikki Hiiri", "Aku Ankka", "Hessu Hopo", "Roope Ankka", "Hessu Hopo","Hessu Hopo",
+                              "Mikki Hiiri", "Aku Ankka", "Hessu Hopo", "Roope Ankka")
                             .map(name -> {
                                 String[] split = name.split(" ");
                                 Customer customer = new Customer();
                                 customer.setFirstName(split[0]);
                                 customer.setLastName(split[1]);
-                                customer.setProduct(products.get(r.nextInt(products.size())));
+                                customer.setType(groupEntities.get(r.nextInt(groupEntities.size())));
                                 customer.setStatus(Customer.Status.values()[r.nextInt(Customer.Status.values().length)]);
                                 String email = (customer.getFirstName() + "." + customer.getLastName() + "@" + "jyu.fi").toLowerCase();
                                 customer.setEmail(email);

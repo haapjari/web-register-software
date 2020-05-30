@@ -31,7 +31,7 @@ public class ListViewTest {
         Grid<Customer> grid = listView.grid;
         Customer firstContact = getFirstItem(grid);
 
-        ContactForm form = listView.form;
+        CustomerForm form = listView.form;
 
         Assert.assertFalse(form.isVisible());
         grid.asSingleSelect().setValue(firstContact);

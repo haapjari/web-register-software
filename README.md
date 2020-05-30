@@ -19,13 +19,16 @@ Tämä harjoitus työ on funktionaalinen full-stack web-sovellus, mikä on kirjo
 
 ### Teknologiat
 
+#### Front-End
 - Visuaalisesti "ns. front-end" sovellus on toteutettu Vaadin - web-sovelluskehyksellä, joka perustuu avoimeen lähdekoodiin.
-- Vaadin tarjoaa laajasti mahdollisuuden erilaisten UI - komponenttien käyttöön, ja reitityksen eri näkymien (ns. Views) välillä.
+- Vaadin seuraa komponenttipohjaista ohjelmointimallia, ja tarjoaa laajasti mahdollisuuden erilaisten UI - komponenttien käyttöön ja reitityksen eri näkymien (ns. Views) välillä. Vaadin käyttää reititystä ohjaamalla, mikä näkymä tulisi avata.
+- 
 
+#### Back-End
 - Taustalla "ns. back-end" sovelluksen muskeleina toimii Spring Boot, joka on Java:lla kirjoitettu web-sovelluskehys, millä on mahdollista luoda erilaisia web-sovelluksia.
 - Olennaisimmat Spring Bootin ominaisuudet mitä projektissa on käytetty
 * Riippuuvuusinjektiot, millä pystyy erotella komponentit toisistaan.
-* Spring Data JPA, sovelluskehitysrajapinta, relationaalisen datan hallintaan. Näin sovellus voi tallentaa muistista dataa tietokantaan.
+* Spring Data JPA, sovelluskehitysrajapinta relationaalisen datan hallintaan. Taustalla Hibernata kartoittaa Java-olioita tietokantayksiköihin JPA:n läpi (Java Persistence API)
 * Spring Security, tietoturvakehys autentikoinnin ja saavutettavuuden rajoittamiseksi.
 * Tomcat, sisäänrakennettu "servlet", eli Javan ohjelmistokomponentti, joka käsittelee selaimen palvelinpyynnöt ja välittää nämä palvelimelle.
 * Spring Boot, ohjelmistokehitystyökalut.

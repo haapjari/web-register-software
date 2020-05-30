@@ -8,6 +8,12 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+/**
+ * @author Jari Haapasaari
+ * @version 30.5.2020
+ * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
+ */
+
 /* Maps view to the "login" path. LoginView should use whole browser window, so we dont use MainLayout as parent. */
 
 @Route("login")

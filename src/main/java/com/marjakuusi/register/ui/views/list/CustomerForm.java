@@ -1,12 +1,7 @@
 package com.marjakuusi.register.ui.views.list;
 
-/**
- * @author jthaapas
- * @version 7.5.2020
- */
-
 import com.marjakuusi.register.backend.entity.Customer;
-import com.marjakuusi.register.backend.entity.Product;
+import com.marjakuusi.register.backend.entity.Type;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -25,46 +20,53 @@ import com.vaadin.flow.shared.Registration;
 import java.util.List;
 
 /**
- * This class is a Component, which acts as Form.
+ * @author Jari Haapasaari
+ * @version 30.5.2020
+ * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
  */
+public class CustomerForm extends FormLayout {
 
-// Form will use FormLayout
-public class ContactForm extends FormLayout {
+    /* ----------------------------------------------------------------------------------- */
 
-    /* Parameters */
+    /* attributes */
 
-    // Field Components for Component
     TextField firstName = new TextField("First name");
     TextField lastName = new TextField("Last name");
     EmailField email = new EmailField("Email");
     ComboBox<Customer.Status> status = new ComboBox<>("Status");
-    ComboBox<Product> company = new ComboBox<>("Product");
+    ComboBox<Type> type = new ComboBox<>("Type");
+
+    /* buttons */
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
     Button close = new Button("Cancel");
 
-    /* -------------------------------------------------- */
+    /* This object binds data objects to user interface */
 
-    // This Class Binds Data Objects to UI
     Binder<Customer> binder = new BeanValidationBinder<>(Customer.class);
 
-    /* -------------------------------------------------- */
+    /* ----------------------------------------------------------------------------------- */
 
-    /* Components are added to layout */
-    public ContactForm(List<Product> companies) { // Company Object as parameter
+    /* components */
 
-        // CSS Class Name for Styling
+    /**
+     * Constructor
+     * @param types Initializes form component with parameter of different types.
+     */
+    public CustomerForm(List<Type> types) {
+
+        // CSS
         addClassName("customer-form");
 
-        // Matches fields in Customer and ContactForm based on their names.
+        // Binds fields in Customer and CustomerForm based on their names.
         binder.bindInstanceFields(this);
 
-        // Sets list of companies as the items in the company combo box
-        company.setItems(companies);
+        // Sets list of types as the items in the type combo box
+        type.setItems(types);
 
-        // Tells the combo box to use the name of the company as the display value
-        company.setItemLabelGenerator(Product::getName);
+        // Tells the combo box to use the name of the type as the display value
+        type.setItemLabelGenerator(Type::getName);
 
         // Populates the status dropdown with the values from the Customer.Status enum
         status.setItems(Customer.Status.values());
@@ -72,18 +74,23 @@ public class ContactForm extends FormLayout {
                 firstName,
                 lastName,
                 email,
-                company,
+                type,
                 status,
                 createButtonsLayout() //
         );
     }
 
+    /**
+     * Component that creates buttons layout.
+     * @return Buttons layout.
+     */
     private Component createButtonsLayout() {
 
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
         close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
+        /* Some usability, keyboard functionality. */
         save.addClickShortcut(Key.ENTER);
         close.addClickShortcut(Key.ESCAPE);
 
@@ -97,8 +104,12 @@ public class ContactForm extends FormLayout {
         return new HorizontalLayout(save, delete, close);
     }
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /* events */
+
     /**
-     * Save event
+     * Validates the data before save event.
      */
     private void validateAndSave() {
         if (binder.isValid()) {
@@ -107,21 +118,31 @@ public class ContactForm extends FormLayout {
     }
 
     /**
-     * Method calls binder.setBean to bind values from the customer to the UI fields
-     * @param customer
+     * Calls binder.setBean to bind values from the customer to the fields in UI.
+     * @param customer Object which values are binded to the UI.
      */
     public void setContact(Customer customer) {
         binder.setBean(customer);
     }
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /* inner class */
+
     /**
-     * Inner Class.
+     * SuperClass for events in form.
      */
-    public static abstract class ContactFormEvent extends ComponentEvent<ContactForm> {
+    public static abstract class CustomerFormEvent extends ComponentEvent<CustomerForm> {
         private Customer customer;
 
         // Common superclass for all events. Contains all customer that was edited or deleted.
-        protected ContactFormEvent(ContactForm source, Customer customer) {
+
+        /**
+         * Common superclass for all form events. Contains data from customer that was edited or deleted.
+         * @param source Which object will be shown on form.
+         * @param customer Object that is on form.
+         */
+        protected CustomerFormEvent(CustomerForm source, Customer customer) {
             super(source, false);
             this.customer = customer;
         }
@@ -131,24 +152,40 @@ public class ContactForm extends FormLayout {
         }
     }
 
-    public static class SaveEvent extends ContactFormEvent {
-        SaveEvent(ContactForm source, Customer customer) {
+    /**
+     * Event: Save
+     */
+    public static class SaveEvent extends CustomerFormEvent {
+        SaveEvent(CustomerForm source, Customer customer) {
             super(source, customer);
         }
     }
 
-    public static class DeleteEvent extends ContactFormEvent {
-        DeleteEvent(ContactForm source, Customer customer) {
+    /**
+     * Event: Delete
+     */
+    public static class DeleteEvent extends CustomerFormEvent {
+        DeleteEvent(CustomerForm source, Customer customer) {
             super(source, customer);
         }
     }
 
-    public static class CloseEvent extends ContactFormEvent {
-        CloseEvent(ContactForm source) {
+    /**
+     * Event: Close
+     */
+    public static class CloseEvent extends CustomerFormEvent {
+        CloseEvent(CustomerForm source) {
             super(source, null);
         }
     }
 
+    /**
+     * This method uses Vaadins event bus to register custom event types.
+     * @param eventType Custom event type.
+     * @param listener Listener that event type is binded to.
+     * @param <T> Type
+     * @return Listener
+     */
     // Method uses Vaadin's event bus to register the custom event types.
     public <T extends ComponentEvent<?>> Registration addListener(Class<T>
         eventType, ComponentEventListener<T> listener) {

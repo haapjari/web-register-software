@@ -1,6 +1,6 @@
 package com.marjakuusi.register.ui.views.dashboard;
 
-import com.marjakuusi.register.backend.service.ProductService;
+import com.marjakuusi.register.backend.service.TypeService;
 import com.marjakuusi.register.backend.service.CustomerService;
 import com.marjakuusi.register.ui.MainLayout;
 import com.vaadin.flow.component.Component;
@@ -15,6 +15,12 @@ import com.vaadin.flow.router.Route;
 
 import java.util.Map;
 
+/**
+ * @author Jari Haapasaari
+ * @version 30.5.2020
+ * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
+ */
+
 /* DashboardView is mapped to the "dashboard" path and uses MainLayout as parent layout */
 
 /* PageTitle sets title for the page. */
@@ -24,12 +30,12 @@ import java.util.Map;
 public class DashboardView extends VerticalLayout {
 
     private CustomerService customerService;
-    private ProductService productService;
+    private TypeService typeService;
 
     /* Takes both services as parameters and saves them as fields */
-    public DashboardView(CustomerService customerService, ProductService productService) {
+    public DashboardView(CustomerService customerService, TypeService typeService) {
         this.customerService = customerService;
-        this.productService = productService;
+        this.typeService = typeService;
         addClassName("dashboard-view");
 
         /* Centers contents of the layout */
@@ -59,7 +65,7 @@ public class DashboardView extends VerticalLayout {
 
         // Charts use a DataSeries for data
         DataSeries dataSeries = new DataSeries();
-        Map<String, Integer> companies = productService.getStats();
+        Map<String, Integer> companies = typeService.getStats();
         companies.forEach((company, employees) ->
                 dataSeries.add(new DataSeriesItem(company, employees))); // Adds a DataSeriesItem, containing the company name and number of employees, for each company.
         chart.getConfiguration().setSeries(dataSeries); // Sets the data series to the chart configuration.

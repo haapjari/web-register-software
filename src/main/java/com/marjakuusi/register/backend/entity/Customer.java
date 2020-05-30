@@ -5,11 +5,21 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author Jari Haapasaari
+ * @version 30.5.2020
+ * Customer Entity Class. Customer class holds details for customer details.
+ */
 @Entity
 public class Customer extends AbstractEntity implements Cloneable {
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /* attributes */
+
+    // enum is a special class that represents group of unchangeable variables
     public enum Status {
-        Active, Passive
+        CEO, POC, Employee
     }
 
     @NotNull
@@ -20,9 +30,11 @@ public class Customer extends AbstractEntity implements Cloneable {
     @NotEmpty
     private String lastName = "";
 
+    /* TODO Issue */
+
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private Product product;
+    private Type type;
 
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -32,6 +44,10 @@ public class Customer extends AbstractEntity implements Cloneable {
     @NotNull
     @NotEmpty
     private String email = "";
+
+    /* ----------------------------------------------------------------------------------- */
+
+    /* logic */
 
     public String getEmail() {
         return email;
@@ -65,14 +81,19 @@ public class Customer extends AbstractEntity implements Cloneable {
         this.firstName = firstName;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public Product getProduct() {
-        return product;
+    public Type getType() {
+        return type;
     }
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /**
+     * Overrides Javas toString method to return full name
+     */
     @Override
     public String toString() {
         return firstName + " " + lastName;
