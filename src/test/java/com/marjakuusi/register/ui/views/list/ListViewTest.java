@@ -1,6 +1,6 @@
 package com.marjakuusi.register.ui.views.list;
 
-import com.marjakuusi.register.backend.entity.Contact;
+import com.marjakuusi.register.backend.entity.Customer;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import org.junit.Assert;
@@ -28,8 +28,8 @@ public class ListViewTest {
 
     @Test
     public void formShownWhenContactSelected() {
-        Grid<Contact> grid = listView.grid;
-        Contact firstContact = getFirstItem(grid);
+        Grid<Customer> grid = listView.grid;
+        Customer firstContact = getFirstItem(grid);
 
         ContactForm form = listView.form;
 
@@ -38,7 +38,7 @@ public class ListViewTest {
         Assert.assertTrue(form.isVisible());
         Assert.assertEquals(firstContact, form.binder.getBean());
     }
-    private Contact getFirstItem(Grid<Contact> grid) {
-        return( (ListDataProvider<Contact>) grid.getDataProvider()).getItems().iterator().next();
+    private Customer getFirstItem(Grid<Customer> grid) {
+        return( (ListDataProvider<Customer>) grid.getDataProvider()).getItems().iterator().next();
     }
 }

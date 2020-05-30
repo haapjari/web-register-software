@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route;
 /* Maps view to the "login" path. LoginView should use whole browser window, so we dont use MainLayout as parent. */
 
 @Route("login")
-@PageTitle("Login | Vaadin CRM")
+@PageTitle("Login | Web Register Software")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
     private LoginForm login = new LoginForm();
@@ -26,7 +26,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
         // Sets login form action "login" to post the login from Spring Security
         login.setAction("login");
-        add(new H1("Vaadin CRM"), login);
+        add(new H1("Web Register Software"), login);
     }
 
     @Override

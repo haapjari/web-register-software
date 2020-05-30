@@ -1,7 +1,7 @@
 package com.marjakuusi.register.ui.views.list;
 
-import com.marjakuusi.register.backend.entity.Company;
-import com.marjakuusi.register.backend.entity.Contact;
+import com.marjakuusi.register.backend.entity.Customer;
+import com.marjakuusi.register.backend.entity.Product;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,27 +11,27 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ContactFormTest {
-    private List<Company> companies;
-    private Contact marcUsher;
-    private Company company1;
-    private Company company2;
+    private List<Product> companies;
+    private Customer marcUsher;
+    private Product product1;
+    private Product product2;
 
     /* The @Before annotation adds dummy data that is used for testing. This method is executed before each @Test method */
 
     @Before
     public void setupData() {
         companies = new ArrayList<>();
-        company1 = new Company("Vaadin Ltd");
-        company2 = new Company("IT Mill");
-        companies.add(company1);
-        companies.add(company2);
+        product1 = new Product("Vaadin Ltd");
+        product2 = new Product("IT Mill");
+        companies.add(product1);
+        companies.add(product2);
 
-        marcUsher = new Contact();
+        marcUsher = new Customer();
         marcUsher.setFirstName("Marc");
         marcUsher.setLastName("Usher");
         marcUsher.setEmail("marc@usher.com");
-        marcUsher.setStatus(Contact.Status.NotContacted);
-        marcUsher.setCompany(company2);
+        marcUsher.setStatus(Customer.Status.Passive);
+        marcUsher.setProduct(product2);
     }
 
     /**
@@ -46,8 +46,8 @@ public class ContactFormTest {
         Assert.assertEquals("Marc", form.firstName.getValue());
         Assert.assertEquals("Usher", form.lastName.getValue());
         Assert.assertEquals("marc@usher.com", form.email.getValue());
-        Assert.assertEquals(company2, form.company.getValue());
-        Assert.assertEquals(Contact.Status.NotContacted, form.status.getValue());
+        Assert.assertEquals(product2, form.company.getValue());
+        Assert.assertEquals(Customer.Status.Passive, form.status.getValue());
     }
 
     /**
@@ -56,35 +56,35 @@ public class ContactFormTest {
     @Test
     public void saveEventHasCorrectValues() {
         ContactForm form = new ContactForm(companies);
-        Contact contact = new Contact();
-        form.setContact(contact);
+        Customer customer = new Customer();
+        form.setContact(customer);
 
         // Populate data
         form.firstName.setValue("John");
         form.lastName.setValue("Doe");
-        form.company.setValue(company1);
+        form.company.setValue(product1);
         form.email.setValue("john@doe.com");
-        form.status.setValue(Contact.Status.Customer);
+        form.status.setValue(Customer.Status.Active);
 
         // Test clicking save button and assert the values end up in the bean.
-        AtomicReference<Contact> savedContactRef = new AtomicReference<>(null);
+        AtomicReference<Customer> savedContactRef = new AtomicReference<>(null);
         form.addListener(ContactForm.SaveEvent.class, e -> {
 
             /* ContactForm fires an event on save and the event data is needed for the test, an AtomicReference is used
              * to store the event data, without using a class field.
              */
 
-            savedContactRef.set(e.getContact());
+            savedContactRef.set(e.getCustomer());
         });
         form.save.click();
-        Contact savedContact = savedContactRef.get(); // Clicks save button
+        Customer savedCustomer = savedContactRef.get(); // Clicks save button
 
-        Assert.assertEquals("John", savedContact.getFirstName());
-        Assert.assertEquals("Doe", savedContact.getLastName());
-        Assert.assertEquals("john@doe.com", savedContact.getEmail());
-        Assert.assertEquals(company1, savedContact.getCompany());
+        Assert.assertEquals("John", savedCustomer.getFirstName());
+        Assert.assertEquals("Doe", savedCustomer.getLastName());
+        Assert.assertEquals("john@doe.com", savedCustomer.getEmail());
+        Assert.assertEquals(product1, savedCustomer.getProduct());
 
         /* Once the data is available, you can use standard assertEquals calls to verify that the bean contains the expected values. */
-        Assert.assertEquals(Contact.Status.Customer, savedContact.getStatus());
+        Assert.assertEquals(Customer.Status.Active, savedCustomer.getStatus());
     }
 }

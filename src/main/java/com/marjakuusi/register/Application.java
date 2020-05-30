@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
- * The entry point of the Spring Boot application.
+ * @author Jari Haapasaari
+ * @version 30.5.2020
+ * This is a Web Application which resembles CRM System.
  */
 @SpringBootApplication(exclude = ErrorMvcAutoConfiguration.class)
 public class Application extends SpringBootServletInitializer {

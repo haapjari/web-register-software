@@ -5,8 +5,8 @@ package com.marjakuusi.register.ui.views.list;
  * @version 7.5.2020
  */
 
-import com.marjakuusi.register.backend.entity.Company;
-import com.marjakuusi.register.backend.entity.Contact;
+import com.marjakuusi.register.backend.entity.Customer;
+import com.marjakuusi.register.backend.entity.Product;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -37,8 +37,8 @@ public class ContactForm extends FormLayout {
     TextField firstName = new TextField("First name");
     TextField lastName = new TextField("Last name");
     EmailField email = new EmailField("Email");
-    ComboBox<Contact.Status> status = new ComboBox<>("Status");
-    ComboBox<Company> company = new ComboBox<>("Company");
+    ComboBox<Customer.Status> status = new ComboBox<>("Status");
+    ComboBox<Product> company = new ComboBox<>("Product");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -47,27 +47,27 @@ public class ContactForm extends FormLayout {
     /* -------------------------------------------------- */
 
     // This Class Binds Data Objects to UI
-    Binder<Contact> binder = new BeanValidationBinder<>(Contact.class);
+    Binder<Customer> binder = new BeanValidationBinder<>(Customer.class);
 
     /* -------------------------------------------------- */
 
     /* Components are added to layout */
-    public ContactForm(List<Company> companies) { // Company Object as parameter
+    public ContactForm(List<Product> companies) { // Company Object as parameter
 
         // CSS Class Name for Styling
-        addClassName("contact-form");
+        addClassName("customer-form");
 
-        // Matches fields in Contact and ContactForm based on their names.
+        // Matches fields in Customer and ContactForm based on their names.
         binder.bindInstanceFields(this);
 
         // Sets list of companies as the items in the company combo box
         company.setItems(companies);
 
         // Tells the combo box to use the name of the company as the display value
-        company.setItemLabelGenerator(Company::getName);
+        company.setItemLabelGenerator(Product::getName);
 
-        // Populates the status dropdown with the values from the Contact.Status enum
-        status.setItems(Contact.Status.values());
+        // Populates the status dropdown with the values from the Customer.Status enum
+        status.setItems(Customer.Status.values());
         add(
                 firstName,
                 lastName,
@@ -107,39 +107,39 @@ public class ContactForm extends FormLayout {
     }
 
     /**
-     * Method calls binder.setBean to bind values from the contact to the UI fields
-     * @param contact
+     * Method calls binder.setBean to bind values from the customer to the UI fields
+     * @param customer
      */
-    public void setContact(Contact contact) {
-        binder.setBean(contact);
+    public void setContact(Customer customer) {
+        binder.setBean(customer);
     }
 
     /**
      * Inner Class.
      */
     public static abstract class ContactFormEvent extends ComponentEvent<ContactForm> {
-        private Contact contact;
+        private Customer customer;
 
-        // Common superclass for all events. Contains all contact that was edited or deleted.
-        protected ContactFormEvent(ContactForm source, Contact contact) {
+        // Common superclass for all events. Contains all customer that was edited or deleted.
+        protected ContactFormEvent(ContactForm source, Customer customer) {
             super(source, false);
-            this.contact = contact;
+            this.customer = customer;
         }
 
-        public Contact getContact() {
-            return contact;
+        public Customer getCustomer() {
+            return customer;
         }
     }
 
     public static class SaveEvent extends ContactFormEvent {
-        SaveEvent(ContactForm source, Contact contact) {
-            super(source, contact);
+        SaveEvent(ContactForm source, Customer customer) {
+            super(source, customer);
         }
     }
 
     public static class DeleteEvent extends ContactFormEvent {
-        DeleteEvent(ContactForm source, Contact contact) {
-            super(source, contact);
+        DeleteEvent(ContactForm source, Customer customer) {
+            super(source, customer);
         }
     }
 

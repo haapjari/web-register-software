@@ -5,16 +5,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class Company extends AbstractEntity {
+public class Product extends AbstractEntity {
     private String name;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
-    private List<Contact> employees = new LinkedList<>();
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<Customer> productOwners = new LinkedList<>();
 
-    public Company() {
+    public Product() {
     }
 
-    public Company(String name) {
+    public Product(String name) {
         setName(name);
     }
 
@@ -26,7 +26,7 @@ public class Company extends AbstractEntity {
         this.name = name;
     }
 
-    public List<Contact> getEmployees() {
-        return employees;
+    public List<Customer> getProductOwners() {
+        return productOwners;
     }
 }

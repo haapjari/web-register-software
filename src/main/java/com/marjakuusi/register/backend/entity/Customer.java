@@ -6,10 +6,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Contact extends AbstractEntity implements Cloneable {
+public class Customer extends AbstractEntity implements Cloneable {
 
     public enum Status {
-        ImportedLead, NotContacted, Contacted, Customer, ClosedLost
+        Active, Passive
     }
 
     @NotNull
@@ -22,11 +22,11 @@ public class Contact extends AbstractEntity implements Cloneable {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private Company company;
+    private Product product;
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private Contact.Status status;
+    private Customer.Status status;
 
     @Email
     @NotNull
@@ -65,12 +65,12 @@ public class Contact extends AbstractEntity implements Cloneable {
         this.firstName = firstName;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Company getCompany() {
-        return company;
+    public Product getProduct() {
+        return product;
     }
 
     @Override

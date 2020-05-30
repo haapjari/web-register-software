@@ -1,9 +1,9 @@
 package com.marjakuusi.register.ui.views.list;
 
-import com.marjakuusi.register.backend.entity.Company;
-import com.marjakuusi.register.backend.entity.Contact;
-import com.marjakuusi.register.backend.service.CompanyService;
-import com.marjakuusi.register.backend.service.ContactService;
+import com.marjakuusi.register.backend.entity.Customer;
+import com.marjakuusi.register.backend.entity.Product;
+import com.marjakuusi.register.backend.service.ProductService;
+import com.marjakuusi.register.backend.service.CustomerService;
 
 import com.marjakuusi.register.ui.MainLayout;
 import com.vaadin.flow.component.button.Button;
@@ -36,25 +36,25 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 @Route(value="", layout = MainLayout.class)
-@PageTitle("Contacts | Vaadin CRM")
+@PageTitle("Customers | Web Register Software")
 public class ListView extends VerticalLayout {
 
     // Creates new ContactForm Component
     ContactForm form;
 
-    // Creates grid object of Contact Objects
-    Grid<Contact> grid = new Grid<>(Contact.class);
+    // Creates grid object of Customer Objects
+    Grid<Customer> grid = new Grid<>(Customer.class);
 
     // Creates TextField Object for filtering text
     TextField filterText = new TextField();
 
-    // Creates an object of Contact Service, which is responsible for business logic
-    private ContactService contactService;
+    // Creates an object of Customer Service, which is responsible for business logic
+    private CustomerService customerService;
 
-    public ListView(ContactService contactService,
-                    CompanyService companyService) {
+    public ListView(CustomerService customerService,
+                    ProductService productService) {
 
-        this.contactService = contactService;
+        this.customerService = customerService;
         addClassName("list-view");
         setSizeFull();
 
@@ -62,7 +62,7 @@ public class ListView extends VerticalLayout {
         // configureFilter(); // Method call for what filter should do
 
         // Initialize the form in the constructor.
-        form = new ContactForm(companyService.findAll());
+        form = new ContactForm(productService.findAll());
 
         // Listeners to forms.
         form.addListener(ContactForm.SaveEvent.class, this::saveContact);
@@ -89,7 +89,7 @@ public class ListView extends VerticalLayout {
      * @param event event that is handled
      */
     private void saveContact(ContactForm.SaveEvent event) {
-        contactService.save(event.getContact());
+        customerService.save(event.getCustomer());
         updateList();
         closeEditor();
     }
@@ -100,7 +100,7 @@ public class ListView extends VerticalLayout {
      * @param event event that is handled
      */
     private void deleteContact(ContactForm.DeleteEvent event) {
-        contactService.delete(event.getContact());
+        customerService.delete(event.getCustomer());
         updateList();
         closeEditor();
     }
@@ -113,7 +113,7 @@ public class ListView extends VerticalLayout {
         grid.setSizeFull();
 
         // Removes the default column definition
-        grid.removeColumnByKey("company");
+        grid.removeColumnByKey("product");
         grid.setColumns("firstName", "lastName", "email", "status");
 
         /*
@@ -121,10 +121,10 @@ public class ListView extends VerticalLayout {
          *
          * addColumn gets a contact parameter, company name or dash.
          */
-        grid.addColumn(contact -> {
-            Company company = contact.getCompany();
-            return company == null ? "-" : company.getName();
-        }).setHeader("Company");
+        grid.addColumn(customer -> {
+            Product product = customer.getProduct();
+            return product == null ? "-" : product.getName();
+        }).setHeader("Product");
 
         /*
          * Turns on automatic sizing, this has to be done invidually to each column.
@@ -134,22 +134,22 @@ public class ListView extends VerticalLayout {
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         /*
-         * Adds listener to the grid, we only want Contact so we use
+         * Adds listener to the grid, we only want Customer so we use
          */
         grid.asSingleSelect().addValueChangeListener(event ->
                 editContact(event.getValue()));
     }
 
     /**
-     * Sets selected contact in the ContactForm and hides or shows the form,
+     * Sets selected customer in the ContactForm and hides or shows the form,
      * depending on the selection. IT also sets the "editing" CSS class name
      * when editing.
      */
-    public void editContact(Contact contact) {
-        if (contact == null) {
+    public void editContact(Customer customer) {
+        if (customer == null) {
             closeEditor();
         } else {
-            form.setContact(contact);
+            form.setContact(customer);
             form.setVisible(true);
             addClassName("editing");
         }
@@ -180,7 +180,7 @@ public class ListView extends VerticalLayout {
      * This method updates list of data, which is presented in grid.
      */
     private void updateList() {
-        grid.setItems(contactService.findAll(filterText.getValue()));
+        grid.setItems(customerService.findAll(filterText.getValue()));
     }
 
     /**
@@ -213,12 +213,12 @@ public class ListView extends VerticalLayout {
     }
 
     /**
-     * Deleselectes the grid and creates new Contact Object and passes that
+     * Deleselectes the grid and creates new Customer Object and passes that
      * to editContact method.
      */
     void addContact() {
         grid.asSingleSelect().clear();
-        editContact(new Contact());
+        editContact(new Customer());
     }
 
 }

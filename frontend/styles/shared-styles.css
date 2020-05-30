@@ -7,7 +7,7 @@
   flex: 2;
 }
 
-.list-view .contact-form {
+.list-view .customer-form {
   flex: 1;
   padding: var(--lumo-space-m);
 }

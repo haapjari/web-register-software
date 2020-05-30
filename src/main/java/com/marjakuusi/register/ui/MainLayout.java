@@ -20,8 +20,8 @@ import com.vaadin.flow.server.PWA;
 
 @CssImport("./styles/shared-styles.css")
 @PWA(
-        name = "VaadinCRM",
-        shortName = "VaadinCRM",
+        name = "WebRegisterSoftware",
+        shortName = "WebRegisterSoftware",
         offlineResources = {
                 "./styles/offline.css",
                 "./images/offline.png"})
@@ -32,7 +32,7 @@ public class MainLayout extends AppLayout { // App layout is Vaadin Layout with 
     }
 
     private void createHeader() {
-        H1 logo = new H1("Vaadin CRM");
+        H1 logo = new H1("Web Register Software");
         logo.addClassName("logo");
 
         // DrawerToggle is a menu button that toggles visibility of a toolbar
