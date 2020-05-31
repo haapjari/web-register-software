@@ -11,7 +11,21 @@ import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
+/**
+ * @author Jari Haapasaari
+ * @version 31.5.2020
+ * Test Class.
+ */
+
+/* TODO Documentation */
+
+
 public abstract class AbstractTest extends ParallelTest {
+
+    /* ----------------------------------------------------------------------------------- */
+
+    /* vaadin */
+
     @BeforeClass
     public static void setupClass() {
 

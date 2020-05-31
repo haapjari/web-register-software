@@ -24,9 +24,9 @@ import org.springframework.stereotype.Component;
  * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
  */
 
-/* ListView matches empty path, but uses MainLayout as its parent*/
-
-/* Component annotation makes it possible to autowire it, Scope ensures that every test runs on fresh instance */
+/* ListView matches empty path, but uses MainLayout as its parent */
+/* Component annotation makes it possible to autowire it */
+/* Scope ensures that every test runs on fresh instance */
 
 @Component
 @Scope("prototype")
@@ -117,7 +117,7 @@ public class ListView extends VerticalLayout {
     }
 
     /**
-     * Configures grid titles and set-ups css classnames.
+     * Configures grid titles and set-ups css class names.
      */
     private void configureGrid() {
         grid.addClassName("customer-grid");
@@ -152,8 +152,8 @@ public class ListView extends VerticalLayout {
     }
 
     /**
-     * Sets selected customer in the CustomerForm and hides or shows the form,
-     * depending on the selection. IT also sets the "editing" CSS class name
+     * Sets selected customer in the form and hides or shows the form,
+     * depending on the selection. Sets the CSS class name as "editing"
      * when editing.
      */
     public void editContact(Customer customer) {
@@ -167,7 +167,7 @@ public class ListView extends VerticalLayout {
     }
 
     /**
-     * Method configures filter for filtering data.
+     * Configures filter for filtering data.
      */
     private void configureFilter() {
 
@@ -181,22 +181,20 @@ public class ListView extends VerticalLayout {
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
 
         /*
-         * Lambda, listener for events.
-         * Value Change triggers updateList() method call
+         * Listener for events, value change triggers updateList() method call.
          */
         filterText.addValueChangeListener((e -> updateList()));
     }
 
     /**
-     * This method updates list of data, which is presented in grid.
+     * Updates list of data which is visible in the grid.
      */
     private void updateList() {
         grid.setItems(customerService.findAll(filterText.getValue()));
     }
 
     /**
-     * Call at the end of the constructor Sets,
-     * clearing out old values and hides the form.
+     * Clears form, removes the css classname and hides the form.
      */
     private void closeEditor() {
         form.setContact(null);
@@ -205,9 +203,8 @@ public class ListView extends VerticalLayout {
     }
 
     /**
-     * Creates layout, that wraps textfield and button, renames configureFilter
-     * method to configureToolbar and replace the contents as follows.
-     * @return Returns the HorizontalLayout Component
+     * Creates toolbar component with filtered search and add contact button.
+     * @return toolbar component
      */
     private HorizontalLayout getToolbar() {
         filterText.setPlaceholder("Filter by name...");
@@ -224,8 +221,7 @@ public class ListView extends VerticalLayout {
     }
 
     /**
-     * Deleselectes the grid and creates new Customer Object and passes that
-     * to editContact method.
+     * Clears selection and opens up new Customer object to editContact to edit.
      */
     void addContact() {
         grid.asSingleSelect().clear();

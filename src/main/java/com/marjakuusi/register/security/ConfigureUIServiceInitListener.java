@@ -7,15 +7,33 @@ import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
 import org.springframework.stereotype.Component;
 
-/* Component annotation registers the listener, Vaadin will pick this up on start-up */
+/**
+ * @author Jari Haapasaari
+ * @version 31.5.2020
+ * Class listens for the initialization of User Interface and adds then listener before every
+ * view transition.
+ */
+
+/* Annotation registers the listener, Vaadin will pick this up on start-up */
 
 @Component
 public class ConfigureUIServiceInitListener implements VaadinServiceInitListener {
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /* logic */
+
+    /* Spring Security restricts access to content based on paths. Vaadin applications
+     * are single-page applications. This means that they do not trigger a full browser
+     * refresh when you navigate between views, even though the path does change.
+     * To secure a Vaadin application, Spring Security needs to be wired to
+     * Vaadin navigation system.
+     */
+
     /**
-     * In serviceInit, we listen for the initialization of the UI (the internal root component in Vaadin)
+     * Listens for the initialization of the User Interface (the internal root component in Vaadin)
      * and then add a listener before every view transition.
-     * @param event Event that is listened to
+     * @param event event that listens for initialization of the User Interface
      */
     @Override
     public void serviceInit(ServiceInitEvent event) {
@@ -26,8 +44,8 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
     }
 
     /**
-     * We redirect all request for login if user is not logged in.
-     * @param event - Request
+     * Redirects all requests to LoginView if user is not already logged in.
+     * @param event that is validated.
      */
     private void authenticateNavigation(BeforeEnterEvent event) {
         if (!LoginView.class.equals(event.getNavigationTarget())

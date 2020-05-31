@@ -27,7 +27,7 @@ Tämä harjoitus työ on funktionaalinen full-stack web-sovellus, mikä on kirjo
 #### Back-End
 - Taustalla "ns. back-end" sovelluksen muskeleina toimii Spring Boot, joka on Java:lla kirjoitettu web-sovelluskehys, millä on mahdollista luoda erilaisia web-sovelluksia.
 - Olennaisimmat Spring Bootin ominaisuudet mitä projektissa on käytetty
-* Riippuuvuusinjektiot, millä pystyy erotella komponentit toisistaan.
+* Riippuuvuusinjektiot, millä pystyy erotella komponentit toisistaan ja käyttämään näin komponentteja tarvittaessa uudelleen.
 * Spring Data JPA, sovelluskehitysrajapinta relationaalisen datan hallintaan. Taustalla Hibernata kartoittaa Java-olioita tietokantayksiköihin JPA:n läpi (Java Persistence API)
 * Spring Security, tietoturvakehys autentikoinnin ja saavutettavuuden rajoittamiseksi.
 * Tomcat, sisäänrakennettu "servlet", eli Javan ohjelmistokomponentti, joka käsittelee selaimen palvelinpyynnöt ja välittää nämä palvelimelle.

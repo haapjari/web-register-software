@@ -11,13 +11,19 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * @author jthaapas
- * @version 30.5.2020
- * TODO Documentation
+ * @author Jari Haapasaari
+ * @version 31.5.2020
+ * Test Class.
  */
 
+/* TODO Documentation */
 
 public class CustomerFormTest {
+
+    /* ----------------------------------------------------------------------------------- */
+
+    /* vaadin */
+
     private List<Type> companies;
     private Customer marcUsher;
     private Type type1;

@@ -56,7 +56,7 @@ public class CustomerService {
     }
 
     /**
-     * Search method for customers.
+     * Search method for customers. Searchs with filter text, otherwise return all.
      * @param stringFilter search parameter.
      * @return matched data
      */

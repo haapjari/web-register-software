@@ -1,9 +1,5 @@
 package com.marjakuusi.register.security;
 
-/**
- * Utility Methods
- */
-
 import com.vaadin.flow.server.ServletHelper;
 import com.vaadin.flow.shared.ApplicationConstants;
 
@@ -15,14 +11,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+/**
+ * @author Jari Haapasaari
+ * @version 31.5.2020
+ * Utility Methods.
+ */
 public final class SecurityUtils {
+
+    /* ----------------------------------------------------------------------------------- */
+
+    /* logic */
 
     private SecurityUtils() {
         // Util methods only
     }
 
     /**
-     * Determines if this request is internal to Vaadin
+     * Determines if this request is internal to Vaadin Framework
      * @param request Request to be proceed
      * @return Excepted behaviour
      */
@@ -34,8 +39,8 @@ public final class SecurityUtils {
     }
 
     /**
-     * Tests if user is logged in
-     * @return status
+     * tests if user is already authenticated and logged in
+     * @return boolean value, if user is already authenticated and logged in
      */
     static boolean isUserLoggedIn() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -12,20 +12,29 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
- * Annotations: Turns on Web Security for this Application and tells framework to use this Class to configure security.
+ * @author Jari Haapasaari
+ * @version 31.5.2020
+ * Spring Security Configuration
  */
-
-@EnableWebSecurity
+@EnableWebSecurity // turns on web security and tells framework to use this class as config
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    /* ----------------------------------------------------------------------------------- */
+
+    /* attributes */
 
     private static final String LOGIN_PROCESSING_URL = "/login";
     private static final String LOGIN_FAILURE_URL = "/login?error";
     private static final String LOGIN_URL = "/login";
     private static final String LOGOUT_SUCCESS_URL = "/login";
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /* logic */
+
     /**
-     * Method to block unauthenticated login requests to all pages except login page.
+     * Block unauthenticated login requests to all pages except login page.
      * @param http
      * @throws Exception
      */

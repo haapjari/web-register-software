@@ -10,6 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * @author Jari Haapasaari
+ * @version 31.5.2020
+ * Test Class.
+ */
+
+/* TODO Documentation */
+
+
 /* Following annotations take care that SPring Boot is initialized before the tests are run and allow you to
  * use @Autowire in test
  */
@@ -17,6 +26,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ListViewTest {
+
+    /* ----------------------------------------------------------------------------------- */
+
+    /* vaadin */
 
     @Autowired
     private ListView listView;

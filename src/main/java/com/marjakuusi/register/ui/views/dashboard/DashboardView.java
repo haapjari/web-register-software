@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author Jari Haapasaari
- * @version 30.5.2020
+ * @version 31.5.2020
  * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
  */
 
@@ -29,45 +29,65 @@ import java.util.Map;
 @PageTitle("Dashboard | Web Register Software")
 public class DashboardView extends VerticalLayout {
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /* attributes */
+
     private CustomerService customerService;
     private TypeService typeService;
 
-    /* Takes both services as parameters and saves them as fields */
-    public DashboardView(CustomerService customerService, TypeService typeService) {
-        this.customerService = customerService;
-        this.typeService = typeService;
-        addClassName("dashboard-view");
+    /* ----------------------------------------------------------------------------------- */
 
-        /* Centers contents of the layout */
-        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-
-        add(getContactStats(), getCompaniesChart());
-    }
+    /* constructors */
 
     /**
-     * Displays the number of contacts in the system
-     * @return
+     * Constructs a Dashboard component.
+     * @param customerService Service class, which handles the database access.
+     * @param typeService Service class, which handles the database access.
      */
-    private Component getContactStats() {
-        Span stats = new Span(customerService.count() + " contacts");
-        stats.addClassName("contact-stats");
+    public DashboardView(CustomerService customerService, TypeService typeService) {
+
+        /* Takes both services as parameters and saves them as fields */
+        this.customerService = customerService;
+        this.typeService = typeService;
+
+        // css class
+        addClassName("dashboard-view");
+
+        /* centers contents of the layout */
+        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+
+        // Components to show stats, chart
+        add(getCustomerStats(), getTypesChart());
+    }
+
+    /* ----------------------------------------------------------------------------------- */
+
+    /* logic */
+
+    /**
+     * @return Returns amount of customers in "customerService" object as Span
+     */
+    private Component getCustomerStats() {
+        Span stats = new Span(customerService.count() + " customers");
+        stats.addClassName("customer-stats");
+
         return stats;
     }
 
     /**
-     * Method constructs the chart.
-     * @return chart
+     * @return Pie-Chart of different types of customers.
      */
-    private Chart getCompaniesChart() {
+    private Chart getTypesChart() {
 
         // Creates new PIE Chart
         Chart chart = new Chart(ChartType.PIE);
 
         // Charts use a DataSeries for data
         DataSeries dataSeries = new DataSeries();
-        Map<String, Integer> companies = typeService.getStats();
-        companies.forEach((company, employees) ->
-                dataSeries.add(new DataSeriesItem(company, employees))); // Adds a DataSeriesItem, containing the company name and number of employees, for each company.
+        Map<String, Integer> types = typeService.getStats();
+        types.forEach((type, customers) ->
+                dataSeries.add(new DataSeriesItem(type, customers))); // Adds a DataSeriesItem, containing the company name and number of employees, for each company.
         chart.getConfiguration().setSeries(dataSeries); // Sets the data series to the chart configuration.
         return chart;
     }

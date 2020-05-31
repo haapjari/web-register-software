@@ -7,8 +7,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 /**
  * @author Jari Haapasaari
- * @version 30.5.2020
- * This is a Web Application which resembles CRM System.
+ * @version 31.5.2020
+ * This is a Web Application which resembles CRM System. More details on README.md
  */
 @SpringBootApplication(exclude = ErrorMvcAutoConfiguration.class)
 public class Application extends SpringBootServletInitializer {
