@@ -12,63 +12,67 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author Jari Haapasaari
- * @version 31.5.2020
- * Test Class.
+ * @version 1.6.2020
+ * Test Class for Customer Form. Unit testing.
  */
-
-/* TODO Documentation */
 
 public class CustomerFormTest {
 
     /* ----------------------------------------------------------------------------------- */
 
-    /* vaadin */
+    /* attributes */
 
-    private List<Type> companies;
-    private Customer marcUsher;
+    private List<Type> differentTypes;
+    private Customer akuAnkka;
     private Type type1;
     private Type type2;
 
-    /* The @Before annotation adds dummy data that is used for testing. This method is executed before each @Test method */
+    /* ----------------------------------------------------------------------------------- */
 
+    /* test logic */
+
+    /**
+     * @Before annotation is executed before @Test
+     * Setups data for testing purposes.
+     */
     @Before
     public void setupData() {
-        companies = new ArrayList<>();
-        type1 = new Type("Vaadin Ltd");
-        type2 = new Type("IT Mill");
-        companies.add(type1);
-        companies.add(type2);
+        differentTypes = new ArrayList<>();
+        type1 = new Type("Business");
+        type2 = new Type("Consumer");
+        differentTypes.add(type1);
+        differentTypes.add(type2);
 
-        marcUsher = new Customer();
-        marcUsher.setFirstName("Marc");
-        marcUsher.setLastName("Usher");
-        marcUsher.setEmail("marc@usher.com");
-        marcUsher.setStatus(Customer.Status.POC);
-        marcUsher.setType(type2);
+        akuAnkka = new Customer();
+        akuAnkka.setFirstName("Aku");
+        akuAnkka.setLastName("Ankka");
+        akuAnkka.setEmail("aku@jyu.com");
+        akuAnkka.setStatus(Customer.Status.POC);
+        akuAnkka.setType(type2);
     }
 
     /**
-     * Test method for populating data
+     * Populates data to CustomerForm. Uses JUnit.
      */
     @Test
     public void formFieldsPopulated() {
-        CustomerForm form = new CustomerForm(companies);
-        form.setContact(marcUsher); // Validates that fields are populated correctly.
+        CustomerForm form = new CustomerForm(differentTypes);
+        form.setContact(akuAnkka); // Validates that fields are populated correctly.
 
         // Uses standard JUnit assertEquals methods to compare values.
-        Assert.assertEquals("Marc", form.firstName.getValue());
-        Assert.assertEquals("Usher", form.lastName.getValue());
-        Assert.assertEquals("marc@usher.com", form.email.getValue());
+        Assert.assertEquals("Aku", form.firstName.getValue());
+        Assert.assertEquals("Ankka", form.lastName.getValue());
+        Assert.assertEquals("aku@jyu.com", form.email.getValue());
         Assert.assertEquals(type2, form.type.getValue());
         Assert.assertEquals(Customer.Status.POC, form.status.getValue());
     }
 
     /**
-     * Test method for saving data
+     * Uses save event and validates that correct field data ends up in the bean.
      */
     @Test
     public void saveEventHasCorrectValues() {
-        CustomerForm form = new CustomerForm(companies);
+        CustomerForm form = new CustomerForm(differentTypes);
         Customer customer = new Customer();
         form.setContact(customer);
 

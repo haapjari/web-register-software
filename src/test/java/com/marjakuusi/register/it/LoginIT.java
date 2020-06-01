@@ -9,28 +9,25 @@ import org.junit.Test;
 
 /**
  * @author Jari Haapasaari
- * @version 31.5.2020
- * Test Class.
+ * @version 1.6.2020
+ * Test Class. End to end testing, ensuring that user can log in.
  */
-
-/* TODO Documentation */
-
-
-/* First integration test */
-
-/* This test ensures that the user can log in */
 public class LoginIT extends AbstractTest {
 
     /* ----------------------------------------------------------------------------------- */
 
-    /* vaadin */
+    /* constructors */
 
     public LoginIT() {
         super("");
     }
 
+    /* ----------------------------------------------------------------------------------- */
+
+    /* logic */
+
     /**
-     *  Test method to validate that ensure that the user can login
+     *  Validates that that the user can login with right credentials.
      */
     @Test
     public void loginAsValidUserSucceeds() {
@@ -39,8 +36,8 @@ public class LoginIT extends AbstractTest {
     }
 
     /**
-     * Test method to validate that user cannot login with invalid credinteals
-     f*/
+     * Validate that user cannot login with invalid credentials.
+     */
     @Test
     public void loginAsInvalidUserFails() {
         LoginViewElement loginView = $(LoginViewElement.class).onPage().first();
