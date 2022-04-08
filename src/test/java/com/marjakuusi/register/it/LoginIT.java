@@ -1,14 +1,14 @@
-package com.marjakuusi.register.it;
+package com.practice.register.it;
 
 
 
-import com.marjakuusi.register.it.elements.login.LoginViewElement;
+import com.practice.register.it.elements.login.LoginViewElement;
 import com.vaadin.flow.component.login.testbench.LoginFormElement;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 1.6.2020
  * Test Class. End to end testing, ensuring that user can log in.
  */

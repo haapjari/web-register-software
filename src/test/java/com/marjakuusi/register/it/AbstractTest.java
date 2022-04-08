@@ -1,4 +1,4 @@
-package com.marjakuusi.register.it;
+package com.practice.register.it;
 
 import com.vaadin.testbench.IPAddress;
 import com.vaadin.testbench.ScreenshotOnFailureRule;
@@ -12,7 +12,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 1.6.2020
  * Abstract Test Class. End-to-end tests are used to test the entire application.
  * End-to-end tests are executed in a browser window, controlled by a web driver and run on the server where the application is deployed.

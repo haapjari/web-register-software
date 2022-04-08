@@ -1,7 +1,7 @@
-package com.marjakuusi.register.backend.service;
+package com.practice.register.backend.service;
 
-import com.marjakuusi.register.backend.entity.Type;
-import com.marjakuusi.register.backend.repository.TypeRepository;
+import com.practice.register.backend.entity.Type;
+import com.practice.register.backend.repository.TypeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 30.5.2020
  * Service Class. This Class will handle business logic and database access.
  */

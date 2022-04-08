@@ -1,6 +1,6 @@
-package com.marjakuusi.register.backend.repository;
+package com.practice.register.backend.repository;
 
-import com.marjakuusi.register.backend.entity.Customer;
+import com.practice.register.backend.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 30.5.2020
  * Repository Class. Interface that describes entity type and primary key type. Spring Data will configure the rest.
  */

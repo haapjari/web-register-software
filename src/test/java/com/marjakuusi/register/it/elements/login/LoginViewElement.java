@@ -1,11 +1,11 @@
-package com.marjakuusi.register.it.elements.login;
+package com.practice.register.it.elements.login;
 
 import com.vaadin.flow.component.login.testbench.LoginFormElement;
 import com.vaadin.flow.component.orderedlayout.testbench.VerticalLayoutElement;
 import com.vaadin.testbench.annotations.Attribute;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 1.6.2020
  * Helper Class for LoginIT. Element Class for Login View.
  */

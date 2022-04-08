@@ -1,4 +1,4 @@
-package com.marjakuusi.register.security;
+package com.practice.register.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 31.5.2020
  * Spring Security Configuration
  */

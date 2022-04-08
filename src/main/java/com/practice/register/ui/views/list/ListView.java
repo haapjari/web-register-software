@@ -1,11 +1,11 @@
-package com.marjakuusi.register.ui.views.list;
+package com.practice.register.ui.views.list;
 
-import com.marjakuusi.register.backend.entity.Customer;
-import com.marjakuusi.register.backend.entity.Type;
-import com.marjakuusi.register.backend.service.TypeService;
-import com.marjakuusi.register.backend.service.CustomerService;
+import com.practice.register.backend.entity.Customer;
+import com.practice.register.backend.entity.Type;
+import com.practice.register.backend.service.TypeService;
+import com.practice.register.backend.service.CustomerService;
 
-import com.marjakuusi.register.ui.MainLayout;
+import com.practice.register.ui.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 30.5.2020
  * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
  */

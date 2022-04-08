@@ -1,8 +1,8 @@
-package com.marjakuusi.register.ui.views.dashboard;
+package com.practice.register.ui.views.dashboard;
 
-import com.marjakuusi.register.backend.service.TypeService;
-import com.marjakuusi.register.backend.service.CustomerService;
-import com.marjakuusi.register.ui.MainLayout;
+import com.practice.register.backend.service.TypeService;
+import com.practice.register.backend.service.CustomerService;
+import com.practice.register.ui.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.ChartType;
@@ -16,7 +16,7 @@ import com.vaadin.flow.router.Route;
 import java.util.Map;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 31.5.2020
  * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
  */

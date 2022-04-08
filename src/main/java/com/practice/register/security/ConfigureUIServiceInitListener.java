@@ -1,6 +1,6 @@
-package com.marjakuusi.register.security;
+package com.practice.register.security;
 
-import com.marjakuusi.register.ui.views.login.LoginView;
+import com.practice.register.ui.views.login.LoginView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.server.ServiceInitEvent;
@@ -8,7 +8,7 @@ import com.vaadin.flow.server.VaadinServiceInitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 31.5.2020
  * Class listens for the initialization of User Interface and adds then listener before every
  * view transition.

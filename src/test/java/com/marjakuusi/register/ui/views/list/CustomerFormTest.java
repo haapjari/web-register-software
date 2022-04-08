@@ -1,7 +1,7 @@
-package com.marjakuusi.register.ui.views.list;
+package com.practice.register.ui.views.list;
 
-import com.marjakuusi.register.backend.entity.Customer;
-import com.marjakuusi.register.backend.entity.Type;
+import com.practice.register.backend.entity.Customer;
+import com.practice.register.backend.entity.Type;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 1.6.2020
  * Test Class for Customer Form. Unit testing.
  */

@@ -1,4 +1,4 @@
-package com.marjakuusi.register;
+package com.practice.register;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 31.5.2020
  * This is a Web Application which resembles CRM System. More details on README.md
  */

@@ -1,4 +1,4 @@
-package com.marjakuusi.register.backend.entity;
+package com.practice.register.backend.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 30.5.2020
  * SuperClass for other Entity Classes
  */

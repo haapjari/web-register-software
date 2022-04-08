@@ -1,11 +1,11 @@
-package com.marjakuusi.register.backend.entity;
+package com.practice.register.backend.entity;
 
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 30.5.2020
  * Entity Class of Customer Type. One "Type" object contains multiple customers.
  * Type can be either "Business", "Enterprise" or "Consumer".

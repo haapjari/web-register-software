@@ -1,7 +1,7 @@
-package com.marjakuusi.register.ui.views.list;
+package com.practice.register.ui.views.list;
 
-import com.marjakuusi.register.backend.entity.Customer;
-import com.marjakuusi.register.backend.entity.Type;
+import com.practice.register.backend.entity.Customer;
+import com.practice.register.backend.entity.Type;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -20,7 +20,7 @@ import com.vaadin.flow.shared.Registration;
 import java.util.List;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 30.5.2020
  * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
  */

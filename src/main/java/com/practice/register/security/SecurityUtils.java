@@ -1,4 +1,4 @@
-package com.marjakuusi.register.security;
+package com.practice.register.security;
 
 import com.vaadin.flow.server.ServletHelper;
 import com.vaadin.flow.shared.ApplicationConstants;
@@ -12,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 31.5.2020
  * Utility Methods.
  */

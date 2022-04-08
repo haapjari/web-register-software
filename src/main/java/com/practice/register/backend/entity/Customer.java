@@ -1,4 +1,4 @@
-package com.marjakuusi.register.backend.entity;
+package com.practice.register.backend.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 30.5.2020
  * Customer Entity Class. Customer class holds details for customer details.
  */

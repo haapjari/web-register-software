@@ -1,4 +1,4 @@
-package com.marjakuusi.register.ui.views.login;
+package com.practice.register.ui.views.login;
 
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
@@ -9,7 +9,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 31.5.2020
  * View Class. This class uses Vaadin Framework to display Graphical User Interface on Web Browser.
  */

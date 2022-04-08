@@ -1,6 +1,6 @@
-package com.marjakuusi.register.ui.views.list;
+package com.practice.register.ui.views.list;
 
-import com.marjakuusi.register.backend.entity.Customer;
+import com.practice.register.backend.entity.Customer;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import org.junit.Assert;
@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author Jari Haapasaari
+ * @author haapjari
  * @version 1.6.2020
  * Test Class. Integration testing for ListView component.
  */
